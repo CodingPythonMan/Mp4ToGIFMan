@@ -44,11 +44,12 @@ void Game_KeyProcess(void)
 		// 콘트롤 키. (미사일 키)
 		if (GetAsyncKeyState(VK_CONTROL))
 		{
+			/*
 			_Missiles[_MissileCount].X = _Player.X;
 			_Missiles[_MissileCount].Y = _Player.Y - 1;
 			_Missiles[_MissileCount].Visible = 1;
 
-			_MissileCount++;
+			_MissileCount++;*/
 		}
 
 		// ESC 키. (일시정지)
@@ -60,5 +61,21 @@ void Game_KeyProcess(void)
 	}
 
 	
+
+}
+
+//--------------------------------------------------------------------
+// 로직부
+//--------------------------------------------------------------------
+void Game_Update()
+{
+
+}
+
+//--------------------------------------------------------------------
+// 랜더링
+//--------------------------------------------------------------------
+void Game_Render()
+{
 
 }

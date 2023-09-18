@@ -7,4 +7,4 @@ enum class SceneType {
 	CLEAR,
 };
 
-SceneType gSceneType;
+extern SceneType gSceneType;
