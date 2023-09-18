@@ -19,7 +19,8 @@ int main(void)
 	while (1)
 	{
 		// 키보드 입력
-		Game_KeyProcess();
+		if (false == Game_KeyProcess())
+			return 0;
 
 		// 로직부
 		Game_Update();
@@ -43,4 +44,6 @@ int main(void)
 			delay = timeGetTime() - beforeTime;
 		}
 	}
+
+	return 0;
 }

@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
+#include "DataRead.h"
 
-char* d_Data_Read(const char* data)
+MovePatternInfo* gMovePatterns[10];
+
+char* Data_Read(const char* data)
 {
 	char* buffer = nullptr;
 	FILE* file = nullptr;
@@ -34,8 +38,7 @@ char* d_Data_Read(const char* data)
 
 void MovePattern_Read()
 {
-	/*
-	char* movePatternInfo = d_Data_Read("MovePattern/MovePatternInfo.data");
+	char* movePatternInfo = Data_Read("MovePattern/MovePatternInfo.data");
 	char* movePattern;
 
 	int pos = 0;
@@ -65,12 +68,12 @@ void MovePattern_Read()
 				memcpy(word, movePatternInfo, pos);
 				strcat_s(file, sizeof(file), word);
 
-				movePattern = d_Data_Read(file);
+				movePattern = Data_Read(file);
 
 				int movePos = 0;
 				int move = 1;
-				MovePattern movePatternStruct;
-				_MovePatterns[i] = &movePatternStruct;
+				MovePatternInfo movePatternStruct;
+				gMovePatterns[i] = &movePatternStruct;
 				while (*(movePattern + movePos) != '\0')
 				{
 					if (*(movePattern + movePos) == ' ')
@@ -79,7 +82,7 @@ void MovePattern_Read()
 						memcpy(word, movePattern, movePos);
 						movePattern += movePos + 1;
 						movePos = 0;
-						_MovePatterns[i]->_dX[move] = atoi(word);
+						gMovePatterns[i]->_dX[move] = atoi(word);
 					}
 
 					if (*(movePattern + movePos) == '\n')
@@ -88,18 +91,18 @@ void MovePattern_Read()
 						memcpy(word, movePattern, movePos);
 						movePattern += movePos + 1;
 						movePos = 0;
-						_MovePatterns[i]->_dY[move] = atoi(word);
+						gMovePatterns[i]->_dY[move] = atoi(word);
 						move++;
 					}
 					movePos++;
 				}
-				_MovePatterns[i]->_move = move;
+				gMovePatterns[i]->_move = move;
 
 				break;
 			}
 			pos++;
 		}
-	}*/
+	}
 }
 
 void Monster_Set()

@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <stdio.h>
 #include "Console.h"
 #include "Game.h"
 #include "Scene.h"
@@ -9,12 +10,26 @@ void Game_Initialize()
 {
 	timeBeginPeriod(1);
 	cs_Initial();
+
 }
 
-void Game_KeyProcess(void)
+bool Game_KeyProcess()
 {
 	switch (gSceneType)
 	{
+	case SceneType::TITLE:
+		if (GetAsyncKeyState(VK_RETURN))
+		{
+			gSceneType = SceneType::STAGE;
+			break;
+		}
+
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8001)
+		{
+			return false;
+		}
+		break;
+
 	case SceneType::STAGE:
 		// 왼쪽 방향키.
 		if (GetAsyncKeyState(VK_LEFT))
@@ -62,13 +77,12 @@ void Game_KeyProcess(void)
 		// ESC 키. (일시정지)
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8001)
 		{
-
+			return false;
 		}
 		break;
 	}
 
-	
-
+	return true;
 }
 
 void Game_Update()

@@ -8,8 +8,9 @@ struct Monster
 	int X;
 	int Y;
 
+	int MovePattern;
 	int Visible;
-	char Appear;
+	char Shape;
 };
 
 //--------------------------------------------------------------------
