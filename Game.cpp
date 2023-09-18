@@ -12,22 +12,22 @@ void Game_KeyProcess(void)
 		// 왼쪽 방향키.
 		if (GetAsyncKeyState(VK_LEFT))
 		{
-			gPlayer._X -= 1;
+			gPlayer._X--;
 		}
 		// 오른쪽 방향키.
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
-			_Player.X += 1;
+			gPlayer._X++;
 		}
 		// 위쪽 방향키.
 		if (GetAsyncKeyState(VK_UP) & 0x8001)
 		{
-			_Player.Y--;
+			gPlayer._Y--;
 		}
 		// 아래쪽 방향키.
 		if (GetAsyncKeyState(VK_DOWN) & 0x8001)
 		{
-			_Player.Y++;
+			gPlayer._Y++;
 		}
 
 		//-------------------------------------------------------------
@@ -35,10 +35,10 @@ void Game_KeyProcess(void)
 		// 게임 화면에서 플레이어가 이동 가능한 구역을 제한한다.
 		//-------------------------------------------------------------
 
-		_Player.X = max(_Player.X, 0);
-		_Player.X = min(_Player.X, 79);
-		_Player.Y = max(_Player.Y, 0);
-		_Player.Y = min(_Player.Y, 23);
+		gPlayer._X = max(gPlayer._X, 0);
+		gPlayer._X = min(gPlayer._X, 79);
+		gPlayer._Y = max(gPlayer._Y, 0);
+		gPlayer._Y = min(gPlayer._Y, 23);
 
 
 		// 콘트롤 키. (미사일 키)

@@ -1,39 +1,12 @@
 #include <stdio.h>
 #include "Game.h"
-#include "Render.h"
 
 #pragma comment(lib, "winmm.lib")
 
-void Buffer_Flip(void)
-{
-	for (int count = 0; count < SCREEN_HEIGHT; count++)
-	{
-		cs_MoveCursor(0, count);
-		printf(ScreenBuffer[count]);
-	}
-}
-
-void Buffer_Clear(void)
-{
-	for (int count = 0; count < SCREEN_HEIGHT; count++)
-	{
-		memset(ScreenBuffer[count], ' ', SCREEN_WIDTH);
-		ScreenBuffer[count][SCREEN_WIDTH - 1] = (char)NULL;
-	}
-}
-
-void Sprite_Draw(int X, int Y, char Sprite)
-{
-	if (X < 0 || Y < 0 || X >= SCREEN_WIDTH - 1 || Y >= SCREEN_HEIGHT)
-		return;
-
-	ScreenBuffer[Y][X] = Sprite;
-}
-
 void Draw_Player(void)
 {
-	if (_Player.Visible)
-		Sprite_Draw(_Player.X, _Player.Y, '#');
+	if (gPlayer.Visible)
+		Sprite_Draw(gPlayer.X, gPlayer.Y, '#');
 
 }
 
