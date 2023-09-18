@@ -1,5 +1,10 @@
 #pragma once
 
-enum class SceneKind {
-
+enum class SceneType {
+	TITLE,
+	STAGE,
+	GAMEOVER,
+	CLEAR,
 };
+
+SceneType gSceneType;

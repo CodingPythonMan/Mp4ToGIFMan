@@ -1,27 +1,8 @@
 #include <stdio.h>
-#include <memory.h>
-#include <Windows.h>
-#include <stdbool.h>
-#include "Console.h"
-#include "Main.h"
-#include "DataRead.h"
 #include "Game.h"
+#include "Render.h"
 
 #pragma comment(lib, "winmm.lib")
-
-void Player_Initial(void)
-{
-	//-------------------------------------------------------------------
-	// 플레이어 최초 데이터 초기화.
-	// HP : 3 
-	// 39,19 위치에서 시작 함.
-	//-------------------------------------------------------------------
-	_Player.HP = 3;
-	_Player.Visible = true;
-
-	_Player.X = 39;
-	_Player.Y = 19;
-}
 
 void Buffer_Flip(void)
 {

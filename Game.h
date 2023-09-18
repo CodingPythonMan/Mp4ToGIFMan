@@ -10,4 +10,4 @@
 //
 // ESC 를 누를 경우 false 리턴, (종료처리)
 //--------------------------------------------------------------------
-bool Game_KeyProcess(void);
+void Game_KeyProcess(void);
