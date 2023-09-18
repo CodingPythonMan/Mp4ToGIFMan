@@ -5,6 +5,12 @@
 #include "Player.h"
 #include "Render.h"
 
+void Game_Initialize()
+{
+	timeBeginPeriod(1);
+	cs_Initial();
+}
+
 void Game_KeyProcess(void)
 {
 	switch (gSceneType)
@@ -79,4 +85,6 @@ void Game_Render()
 	case SceneType::TITLE:
 		DrawTitle();
 	}
+
+	Buffer_Flip();
 }
