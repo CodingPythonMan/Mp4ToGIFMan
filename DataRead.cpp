@@ -5,6 +5,7 @@
 #include "DataRead.h"
 
 MovePatternInfo* gMovePatterns[10];
+MonsterInfo* gMonsterInfos[10];
 
 char* Data_Read(const char* data)
 {
@@ -105,10 +106,9 @@ void MovePattern_Read()
 	}
 }
 
-void Monster_Set()
+void Monster_Read()
 {
-	/*
-	char* monsterInfo = d_Data_Read("Monster/MonsterInfo.data");
+	char* monsterInfo = Data_Read("Monster/MonsterInfo.data");
 	char* monster;
 
 	int pos = 0;
@@ -119,7 +119,7 @@ void Monster_Set()
 	{
 		if (*(monsterInfo + pos) == '\n')
 		{
-			memcpy(word, monster, pos);
+			memcpy(word, monsterInfo, pos);
 			fileCount = atoi(word);
 			monsterInfo += pos + 1;
 			break;
@@ -138,30 +138,52 @@ void Monster_Set()
 				memcpy(word, monsterInfo, pos);
 				strcat_s(file, sizeof(file), word);
 
-				monster = d_Data_Read(file);
+				monster = Data_Read(file);
 
 				int monsterPos = 0;
-				int move = 1;
-				Monster monsterStruct;
-				_Monsters[i] = &monsterStruct;
+				MonsterInfo monsterStruct;
+				gMonsterInfos[i] = &monsterStruct;
+
+				int line = 0;
 				while (*(monster + monsterPos) != '\0')
 				{
-					if (*(monster + monsterPos) == '\n')
+					if (*(monster + monsterPos) == '\n' && line == 0)
 					{
 						memset(word, 0, 100);
 						memcpy(word, monster, monsterPos);
 						monster += monsterPos + 1;
 						monsterPos = 0;
-						_MovePatterns[i]->_dY[move] = atoi(word);
-						move++;
+						gMonsterInfos[i]->_shape = *word;
+						line++;
 					}
-					movePos++;
+
+					if (*(monster + monsterPos) == '\n' && line == 1)
+					{
+						memset(word, 0, 100);
+						memcpy(word, monster, monsterPos);
+						monster += monsterPos + 1;
+						monsterPos = 0;
+						int index = atoi(word);
+						gMonsterInfos[i]->_movePatternPtr = gMovePatterns[index];
+						line++;
+					}
+
+					if (*(monster + monsterPos) == '\n' && line == 2)
+					{
+						memset(word, 0, 100);
+						memcpy(word, monster, monsterPos);
+						monster += monsterPos + 1;
+						monsterPos = 0;
+						gMonsterInfos[i]->_hp = atoi(word);
+						line++;
+						break;
+					}
+					monsterPos++;
 				}
-				_MovePatterns[i]->_move = move;
 
 				break;
 			}
 			pos++;
 		}
-	}*/
+	}
 }

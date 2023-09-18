@@ -5,12 +5,14 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Render.h"
+#include "DataRead.h"
 
 void Game_Initialize()
 {
 	timeBeginPeriod(1);
 	cs_Initial();
-
+	MovePattern_Read();
+	Monster_Read();
 }
 
 bool Game_KeyProcess()
