@@ -2,3 +2,7 @@
 
 SceneType gSceneType;
 
+void DrawTitle()
+{
+
+}

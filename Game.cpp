@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Scene.h"
 #include "Player.h"
+#include "Render.h"
 
 void Game_KeyProcess(void)
 {
@@ -64,18 +65,18 @@ void Game_KeyProcess(void)
 
 }
 
-//--------------------------------------------------------------------
-// 로직부
-//--------------------------------------------------------------------
 void Game_Update()
 {
 
 }
 
-//--------------------------------------------------------------------
-// 랜더링
-//--------------------------------------------------------------------
 void Game_Render()
 {
+	Buffer_Clear();
 
+	switch(gSceneType)
+	{
+	case SceneType::TITLE:
+		DrawTitle();
+	}
 }
