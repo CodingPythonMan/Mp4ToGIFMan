@@ -7,12 +7,15 @@
 #include "Render.h"
 #include "DataRead.h"
 
+int gStageCount;
+
 void Game_Initialize()
 {
 	timeBeginPeriod(1);
 	cs_Initial();
 	MovePattern_Read();
 	Monster_Read();
+	gStageCount = Stage_Read();
 }
 
 bool Game_KeyProcess()

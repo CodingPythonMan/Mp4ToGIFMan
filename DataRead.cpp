@@ -6,6 +6,7 @@
 
 MovePatternInfo gMovePatterns[10];
 MonsterInfo gMonsterInfos[10];
+StageInfo gStageInfos[10][10];
 
 char* Data_Read(const char* data)
 {
@@ -167,7 +168,7 @@ void Monster_Read()
 						memset(word, 0, 100);
 						memcpy(word, monster + eachNextLine, eachOffset - eachNextLine);
 						eachNextLine = eachOffset + 1;
-						gMonsterInfos[i]._movePatternPtr = &gMovePatterns[atoi(word)];
+						gMonsterInfos[i]._movePatternPtr = &gMovePatterns[atoi(word) - 1];
 						line++;
 					}
 					else if (*(monster + eachOffset + 1) == '\0')
@@ -190,4 +191,95 @@ void Monster_Read()
 	}
 
 	free(monsterInfo);
+}
+
+int Stage_Read()
+{
+	char* stageInfo = Data_Read("Stage/StageInfo.data");
+
+	int offset = 0;
+	int nextLine;
+	int fileCount = 0;
+	char word[100] = "";
+	memset(word, 0, 100);
+	while (*(stageInfo + offset) != '\0')
+	{
+		if (*(stageInfo + offset) == '\n')
+		{
+			memcpy(word, stageInfo, offset);
+			fileCount = atoi(word);
+			offset++;
+			break;
+		}
+		offset++;
+	}
+
+	nextLine = offset;
+
+	for (int i = 0; i < fileCount; i++)
+	{
+		for (;;)
+		{
+			if (*(stageInfo + offset) == '\n' || *(stageInfo + offset) == '\0')
+			{
+				char file[100] = "Stage/";
+				memset(word, 0, 100);
+				memcpy(word, stageInfo + nextLine, offset - nextLine);
+				offset++;
+				nextLine = offset;
+				strcat_s(file, sizeof(file), word);
+
+				char* stage = Data_Read(file);
+
+				int eachOffset = 0;
+				int eachNextLine = 0;
+				int spaceBar = 0;
+				int monster = 0;
+				while (*(stage + eachOffset) != '\0')
+				{
+					if (*(stage + eachOffset) == ' ' && spaceBar == 0)
+					{
+						memset(word, 0, 100);
+						memcpy(word, stage + eachNextLine, eachOffset - eachNextLine);
+						eachNextLine = eachOffset + 1;
+						gStageInfos[i][monster]._monsterInfoPtr = &gMonsterInfos[atoi(word) - 1];
+						spaceBar++;
+					}else if (*(stage + eachOffset) == ' ' && spaceBar == 1)
+					{
+						memset(word, 0, 100);
+						memcpy(word, stage + eachNextLine, eachOffset - eachNextLine);
+						eachNextLine = eachOffset + 1;
+						gStageInfos[i][monster]._x = atoi(word);
+						spaceBar++;
+					}else if ((*(stage + eachOffset) == '\n' || *(stage + eachOffset + 1) == '\0') && spaceBar == 2)
+					{
+						if (*(stage + eachOffset + 1) == '\0')
+						{
+							eachOffset++;
+							memset(word, 0, 100);
+							memcpy(word, stage + eachNextLine, eachOffset - eachNextLine);
+							gStageInfos[i][monster]._y = atoi(word);
+							break;
+						}	
+						memset(word, 0, 100);
+						memcpy(word, stage + eachNextLine, eachOffset - eachNextLine);
+						eachNextLine = eachOffset + 1;
+						gStageInfos[i][monster]._y = atoi(word);
+						monster++;
+						spaceBar = 0;
+					}
+					eachOffset++;
+				}
+
+				free(stage);
+
+				break;
+			}
+			offset++;
+		}
+	}
+
+	free(stageInfo);
+
+	return fileCount;
 }
