@@ -1,5 +1,4 @@
 #include <Windows.h>
-#include <stdio.h>
 #include "Console.h"
 #include "Game.h"
 #include "Scene.h"
@@ -7,6 +6,7 @@
 #include "Render.h"
 #include "DataRead.h"
 #include "Monster.h"
+#include "Missile.h"
 
 int gStageCount;
 int gPresentStage = 1;
@@ -43,43 +43,28 @@ bool Game_KeyProcess()
 		// 왼쪽 방향키.
 		if (GetAsyncKeyState(VK_LEFT))
 		{
-			gPlayer._x--;
+			Player_xMove(-1);
 		}
 		// 오른쪽 방향키.
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
-			gPlayer._x++;
+			Player_xMove(1);
 		}
 		// 위쪽 방향키.
 		if (GetAsyncKeyState(VK_UP) & 0x8001)
 		{
-			gPlayer._y--;
+			Player_yMove(-1);
 		}
 		// 아래쪽 방향키.
 		if (GetAsyncKeyState(VK_DOWN) & 0x8001)
 		{
-			gPlayer._y++;
+			Player_yMove(1);
 		}
-
-		//-------------------------------------------------------------
-		// 플레이어 이동 반경 제한.
-		// 게임 화면에서 플레이어가 이동 가능한 구역을 제한한다.
-		//-------------------------------------------------------------
-
-		gPlayer._x = max(gPlayer._x, 0);
-		gPlayer._x = min(gPlayer._x, 79);
-		gPlayer._y = max(gPlayer._y, 0);
-		gPlayer._y = min(gPlayer._y, 23);
 
 		// 콘트롤 키. (미사일 키)
 		if (GetAsyncKeyState(VK_CONTROL))
 		{
-			/*
-			_Missiles[_MissileCount].X = _Player.X;
-			_Missiles[_MissileCount].Y = _Player.Y - 1;
-			_Missiles[_MissileCount].Visible = 1;
-
-			_MissileCount++;*/
+			Player_MissileAttack();
 		}
 
 		// ESC 키. (일시정지)
@@ -123,7 +108,9 @@ void Game_Update()
 	switch (gSceneType)
 	{
 	case SceneType::STAGE:
+		Missile_Update();
 		Monster_Update();
+		Player_Update();
 		break;
 	default:
 		break;
@@ -140,6 +127,7 @@ void Game_Render()
 		Scene_DrawTitle();
 		break;
 	case SceneType::STAGE:
+		Missile_Draw();
 		Monster_Draw();
 		Player_Draw();
 		break;
