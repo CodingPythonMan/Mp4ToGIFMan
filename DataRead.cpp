@@ -21,18 +21,19 @@ char* Data_Read(const char* data)
 	}
 
 	fseek(file, 0, SEEK_END);
-	int size = ftell(file);
+	size_t size = ftell(file);
 	fseek(file, 0, SEEK_SET);
 
-	buffer = (char*)malloc(size);
+	buffer = (char*)malloc(size+1);
 
-	if (buffer == nullptr)
+	if (buffer == nullptr) 
 	{
 		printf("There is No Buffer. \n");
 		return buffer;
 	}
 
 	fread(buffer, 1, size, file);
+	buffer[size] = '\0';
 	fclose(file);
 
 	return buffer;
