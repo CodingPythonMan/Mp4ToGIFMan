@@ -5,7 +5,7 @@
 #include "DataRead.h"
 
 MovePatternInfo gMovePatterns[10];
-MonsterInfo* gMonsterInfos[10];
+MonsterInfo gMonsterInfos[10];
 
 char* Data_Read(const char* data)
 {
@@ -114,81 +114,80 @@ void MovePattern_Read()
 void Monster_Read()
 {
 	char* monsterInfo = Data_Read("Monster/MonsterInfo.data");
-	char* monster;
 
-	int pos = 0;
+	int offset = 0;
+	int nextLine;
 	int fileCount = 0;
 	char word[100] = "";
 	memset(word, 0, 100);
-	while (*(monsterInfo + pos) != '\0')
+	while (*(monsterInfo + offset) != '\0')
 	{
-		if (*(monsterInfo + pos) == '\n')
+		if (*(monsterInfo + offset) == '\n')
 		{
-			memcpy(word, monsterInfo, pos);
+			memcpy(word, monsterInfo, offset);
 			fileCount = atoi(word);
-			monsterInfo += pos + 1;
+			offset++;
 			break;
 		}
-		pos++;
+		offset++;
 	}
+
+	nextLine = offset;
 
 	for (int i = 0; i < fileCount; i++)
 	{
 		for (;;)
 		{
-			if (*(monsterInfo + pos) == '\n')
+			if (*(monsterInfo + offset) == '\n' || *(monsterInfo + offset) == '\0')
 			{
 				char file[100] = "Monster/";
 				memset(word, 0, 100);
-				memcpy(word, monsterInfo, pos);
+				memcpy(word, monsterInfo + nextLine, offset - nextLine);
+				offset++;
+				nextLine = offset;
 				strcat_s(file, sizeof(file), word);
 
-				monster = Data_Read(file);
+				char* monster = Data_Read(file);
 
-				int monsterPos = 0;
-				MonsterInfo monsterStruct;
-				gMonsterInfos[i] = &monsterStruct;
-
+				int eachOffset = 0;
+				int eachNextLine = 0;
 				int line = 0;
-				while (*(monster + monsterPos) != '\0')
+				while (*(monster + eachOffset) != '\0')
 				{
-					if (*(monster + monsterPos) == '\n' && line == 0)
+					if (*(monster + eachOffset) == '\n' && line == 0)
 					{
 						memset(word, 0, 100);
-						memcpy(word, monster, monsterPos);
-						monster += monsterPos + 1;
-						monsterPos = 0;
-						gMonsterInfos[i]->_shape = *word;
+						memcpy(word, monster + eachNextLine, eachOffset - eachNextLine);
+						eachNextLine = eachOffset + 1;
+						gMonsterInfos[i]._shape = *word;
 						line++;
 					}
-
-					if (*(monster + monsterPos) == '\n' && line == 1)
+					else if (*(monster + eachOffset) == '\n' && line == 1)
 					{
 						memset(word, 0, 100);
-						memcpy(word, monster, monsterPos);
-						monster += monsterPos + 1;
-						monsterPos = 0;
-						int index = atoi(word);
-						gMonsterInfos[i]->_movePatternPtr = &gMovePatterns[index];
+						memcpy(word, monster + eachNextLine, eachOffset - eachNextLine);
+						eachNextLine = eachOffset + 1;
+						gMonsterInfos[i]._movePatternPtr = &gMovePatterns[atoi(word)];
 						line++;
 					}
-
-					if (*(monster + monsterPos) == '\n' && line == 2)
+					else if (*(monster + eachOffset + 1) == '\0')
 					{
+						eachOffset++;
 						memset(word, 0, 100);
-						memcpy(word, monster, monsterPos);
-						monster += monsterPos + 1;
-						monsterPos = 0;
-						gMonsterInfos[i]->_hp = atoi(word);
-						line++;
+						memcpy(word, monster + eachNextLine, eachOffset - eachNextLine);
+						gMonsterInfos[i]._hp = atoi(word);
 						break;
 					}
-					monsterPos++;
+					eachOffset++;
 				}
+
+				free(monster);
 
 				break;
 			}
-			pos++;
+			offset++;
 		}
 	}
+
+	free(monsterInfo);
 }
