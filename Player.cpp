@@ -66,9 +66,29 @@ void Player_MissileAttack()
 	}
 }
 
-void Player_Update(void)
+bool Player_Update(void)
 {
+	// 피격처리는 항상 되고 있어야 함.
+	for (int i = 0; i < MAX_MISSILE_COUNT; i++)
+	{
+		if (gMissiles[i]._visible && gMissiles[i]._player == false)
+		{
+			if (gPlayer._visible && gPlayer._x == gMissiles[i]._x && gPlayer._y == gMissiles[i]._y)
+			{
+				gMissiles[i]._visible = 0;
+				gPlayer._hp--;
+
+				if (gPlayer._hp == 0)
+				{
+					return false;
+				}
+			}
+		}
+	}
+
 	gPlayer._attackCoolTime++;
+
+	return true;
 }
 
 void Player_Draw(void)

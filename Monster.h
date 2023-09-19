@@ -1,7 +1,8 @@
 #pragma once
 
 #define MAX_MONSTER_COUNT 20
-#define MOVE_CYCLE 20
+#define MONSTER_MOVE_CYCLE 20
+#define MONSTER_ATTACK_PERIOD 2
 
 //--------------------------------------------------------------------
 // 몬스터 구조체 선언
@@ -14,6 +15,7 @@ struct Monster
 	int _moveCycle;
 	char _shape;
 	int _hp;
+	int _attackCoolTime;
 
 	int _visible;
 };
@@ -26,7 +28,7 @@ void Monster_Set(int presentStage);
 //--------------------------------------------------------------------
 // 몬스터 업데이트
 //--------------------------------------------------------------------
-void Monster_Update();
+bool Monster_Update();
 
 //--------------------------------------------------------------------
 // 몬스터 그리기

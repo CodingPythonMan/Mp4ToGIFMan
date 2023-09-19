@@ -87,13 +87,7 @@ bool Game_KeyProcess()
 		break;
 	case SceneType::GAMEOVER:
 	case SceneType::CLEAR:
-		if (GetAsyncKeyState(VK_RETURN))
-		{
-			gSceneType = SceneType::TITLE;
-			break;
-		}
-
-		if (GetAsyncKeyState(VK_ESCAPE) & 0x8001)
+		if (GetAsyncKeyState(0x51) & 0x8001)
 		{
 			return false;
 		}
@@ -109,8 +103,25 @@ void Game_Update()
 	{
 	case SceneType::STAGE:
 		Missile_Update();
-		Monster_Update();
-		Player_Update();
+		if (false == Monster_Update())
+		{
+			gPresentStage++;
+			if (gPresentStage > gStageCount)
+			{
+				gSceneType = SceneType::CLEAR;
+				break;
+			}
+
+			// 새로운 스테이지 셋팅
+			Monster_Set(gPresentStage);
+			Player_Initial();
+		}
+		if (false == Player_Update())
+		{
+			gSceneType = SceneType::GAMEOVER;
+			break;
+		}
+		
 		break;
 	default:
 		break;

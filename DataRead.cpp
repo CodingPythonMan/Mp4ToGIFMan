@@ -65,12 +65,21 @@ void DataRead_MovePattern()
 	{
 		for (;;)
 		{
-			if (*(movePatternInfo + offset) == '\n' || *(movePatternInfo + offset) == '\0')
+			if (*(movePatternInfo + offset) == '\n' || *(movePatternInfo + offset + 1) == '\0')
 			{
 				char file[100] = "MovePattern/";
-				memset(word, 0, 100);
-				memcpy(word, movePatternInfo + nextLine, offset - nextLine);
-				offset++;
+				if (*(movePatternInfo + offset + 1) == '\0')
+				{
+					offset++;
+					memset(word, 0, 100);
+					memcpy(word, movePatternInfo + nextLine, offset - nextLine);
+				}
+				else
+				{
+					memset(word, 0, 100);
+					memcpy(word, movePatternInfo + nextLine, offset - nextLine);
+					offset++;
+				}
 				nextLine = offset;
 				strcat_s(file, sizeof(file), word);
 
@@ -139,12 +148,21 @@ void DataRead_Monster()
 	{
 		for (;;)
 		{
-			if (*(monsterInfo + offset) == '\n' || *(monsterInfo + offset) == '\0')
+			if (*(monsterInfo + offset) == '\n' || *(monsterInfo + offset + 1) == '\0')
 			{
 				char file[100] = "Monster/";
-				memset(word, 0, 100);
-				memcpy(word, monsterInfo + nextLine, offset - nextLine);
-				offset++;
+				if (*(monsterInfo + offset + 1) == '\0')
+				{
+					offset++;
+					memset(word, 0, 100);
+					memcpy(word, monsterInfo + nextLine, offset - nextLine);
+				}
+				else
+				{
+					memset(word, 0, 100);
+					memcpy(word, monsterInfo + nextLine, offset - nextLine);
+					offset++;
+				}
 				nextLine = offset;
 				strcat_s(file, sizeof(file), word);
 
@@ -220,12 +238,21 @@ int DataRead_Stage()
 	{
 		for (;;)
 		{
-			if (*(stageInfo + offset) == '\n' || *(stageInfo + offset) == '\0')
+			if (*(stageInfo + offset) == '\n' || *(stageInfo + offset + 1) == '\0')
 			{
 				char file[100] = "Stage/";
-				memset(word, 0, 100);
-				memcpy(word, stageInfo + nextLine, offset - nextLine);
-				offset++;
+				if (*(stageInfo + offset + 1) == '\0')
+				{
+					offset++;
+					memset(word, 0, 100);
+					memcpy(word, stageInfo + nextLine, offset - nextLine);
+				}
+				else
+				{
+					memset(word, 0, 100);
+					memcpy(word, stageInfo + nextLine, offset - nextLine);
+					offset++;
+				}
 				nextLine = offset;
 				strcat_s(file, sizeof(file), word);
 

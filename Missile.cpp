@@ -29,21 +29,39 @@ void Missile_Update()
 	{
 		for (int i = 0; i < MAX_MISSILE_COUNT; i++)
 		{
-			if (gMissiles[i]._x < 0 || gMissiles[i]._x > 79 || gMissiles[i]._y < 0 || gMissiles[i]._y > 23)
-			{
-				gMissiles[i]._visible = 0;
-			}
-
 			if (gMissiles[i]._visible)
 			{
 				if (true == gMissiles[i]._player)
+				{
 					gMissiles[i]._y--;
+
+					// 적과 아군 미사일이 만나면 상쇄
+					for (int j = 0; j < MAX_MISSILE_COUNT; j++)
+					{
+						if (gMissiles[j]._visible && gMissiles[j]._player == false
+							&& gMissiles[j]._x == gMissiles[i]._x && gMissiles[j]._y == gMissiles[i]._y)
+						{
+							gMissiles[i]._visible = 0;
+							gMissiles[j]._visible = 0;
+						}
+					}
+				}
 				else
+				{
 					gMissiles[i]._y++;
+				}
 			}
+
+			// 경계로 지나간 미사일은 비활성
+			if (gMissiles[i]._x < 0 || gMissiles[i]._x > 79 || gMissiles[i]._y < 0 || gMissiles[i]._y > 23)
+			{
+				gMissiles[i]._visible = 0;
+			}			
 		}
+
 		gMissileTimeCycle = 0;
 	}
+
 	gMissileTimeCycle++;
 }
 
