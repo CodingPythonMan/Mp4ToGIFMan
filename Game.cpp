@@ -19,6 +19,7 @@ void Game_Initialize()
 	DataRead_Monster();
 	gStageCount = DataRead_Stage();
 	Monster_Set(gPresentStage);
+	Player_Initial();
 }
 
 bool Game_KeyProcess()
@@ -42,22 +43,22 @@ bool Game_KeyProcess()
 		// 왼쪽 방향키.
 		if (GetAsyncKeyState(VK_LEFT))
 		{
-			gPlayer._X--;
+			gPlayer._x--;
 		}
 		// 오른쪽 방향키.
 		if (GetAsyncKeyState(VK_RIGHT))
 		{
-			gPlayer._X++;
+			gPlayer._x++;
 		}
 		// 위쪽 방향키.
 		if (GetAsyncKeyState(VK_UP) & 0x8001)
 		{
-			gPlayer._Y--;
+			gPlayer._y--;
 		}
 		// 아래쪽 방향키.
 		if (GetAsyncKeyState(VK_DOWN) & 0x8001)
 		{
-			gPlayer._Y++;
+			gPlayer._y++;
 		}
 
 		//-------------------------------------------------------------
@@ -65,10 +66,10 @@ bool Game_KeyProcess()
 		// 게임 화면에서 플레이어가 이동 가능한 구역을 제한한다.
 		//-------------------------------------------------------------
 
-		gPlayer._X = max(gPlayer._X, 0);
-		gPlayer._X = min(gPlayer._X, 79);
-		gPlayer._Y = max(gPlayer._Y, 0);
-		gPlayer._Y = min(gPlayer._Y, 23);
+		gPlayer._x = max(gPlayer._x, 0);
+		gPlayer._x = min(gPlayer._x, 79);
+		gPlayer._y = max(gPlayer._y, 0);
+		gPlayer._y = min(gPlayer._y, 23);
 
 		// 콘트롤 키. (미사일 키)
 		if (GetAsyncKeyState(VK_CONTROL))
@@ -84,6 +85,31 @@ bool Game_KeyProcess()
 		// ESC 키. (일시정지)
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8001)
 		{
+			gSceneType = SceneType::STOP;
+		}
+		break;
+	case SceneType::STOP:
+		if (GetAsyncKeyState(VK_RETURN))
+		{
+			gSceneType = SceneType::STAGE;
+			break;
+		}
+
+		if (GetAsyncKeyState(0x51) & 0x8001)
+		{
+			return false;
+		}
+		break;
+	case SceneType::GAMEOVER:
+	case SceneType::CLEAR:
+		if (GetAsyncKeyState(VK_RETURN))
+		{
+			gSceneType = SceneType::TITLE;
+			break;
+		}
+
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8001)
+		{
 			return false;
 		}
 		break;
@@ -96,12 +122,10 @@ void Game_Update()
 {
 	switch (gSceneType)
 	{
-	case SceneType::TITLE:
-
-		break;
-
 	case SceneType::STAGE:
 		Monster_Update();
+		break;
+	default:
 		break;
 	}
 }
@@ -117,6 +141,16 @@ void Game_Render()
 		break;
 	case SceneType::STAGE:
 		Monster_Draw();
+		Player_Draw();
+		break;
+	case SceneType::STOP:
+		Scene_DrawStop();
+		break;
+	case SceneType::GAMEOVER:
+		Scene_DrawGameOver();
+		break;
+	case SceneType::CLEAR:
+		Scene_DrawClear();
 		break;
 	}
 

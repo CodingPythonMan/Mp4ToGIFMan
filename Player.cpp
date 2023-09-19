@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Render.h"
 
 //--------------------------------------------------------------------
 // 플레이어 인스턴스 선언, (1인용 이니 하나만 하자)
@@ -12,14 +13,19 @@ void Player_Initial(void)
 	// HP : 3 
 	// 39,19 위치에서 시작 함.
 	//-------------------------------------------------------------------
-	gPlayer._HP = 3;
-	gPlayer._Visible = true;
+	gPlayer._hp = 3;
+	gPlayer._visible = true;
 
-	gPlayer._X = 39;
-	gPlayer._Y = 19;
+	gPlayer._x = 39;
+	gPlayer._y = 19;
 }
 
 void Player_Update(void)
 {
 
+}
+
+void Player_Draw(void)
+{
+	Sprite_Draw(gPlayer._x, gPlayer._y, '#');
 }
