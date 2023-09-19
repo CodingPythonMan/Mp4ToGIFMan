@@ -6,16 +6,19 @@
 #include "Player.h"
 #include "Render.h"
 #include "DataRead.h"
+#include "Monster.h"
 
 int gStageCount;
+int gPresentStage = 1;
 
 void Game_Initialize()
 {
 	timeBeginPeriod(1);
 	cs_Initial();
-	MovePattern_Read();
-	Monster_Read();
-	gStageCount = Stage_Read();
+	DataRead_MovePattern();
+	DataRead_Monster();
+	gStageCount = DataRead_Stage();
+	Monster_Set(gPresentStage);
 }
 
 bool Game_KeyProcess()
@@ -67,7 +70,6 @@ bool Game_KeyProcess()
 		gPlayer._Y = max(gPlayer._Y, 0);
 		gPlayer._Y = min(gPlayer._Y, 23);
 
-
 		// 콘트롤 키. (미사일 키)
 		if (GetAsyncKeyState(VK_CONTROL))
 		{
@@ -92,7 +94,16 @@ bool Game_KeyProcess()
 
 void Game_Update()
 {
+	switch (gSceneType)
+	{
+	case SceneType::TITLE:
 
+		break;
+
+	case SceneType::STAGE:
+		Monster_Update();
+		break;
+	}
 }
 
 void Game_Render()
@@ -102,7 +113,11 @@ void Game_Render()
 	switch(gSceneType)
 	{
 	case SceneType::TITLE:
-		DrawTitle();
+		Scene_DrawTitle();
+		break;
+	case SceneType::STAGE:
+		Monster_Draw();
+		break;
 	}
 
 	Buffer_Flip();

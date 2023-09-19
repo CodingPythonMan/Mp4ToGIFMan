@@ -3,7 +3,7 @@
 
 SceneType gSceneType = SceneType::TITLE;
 
-void DrawTitle()
+void Scene_DrawTitle()
 {
 	String_Set(19,2,"忙式式式式式式式式式式式式式式式式式式式式式式式式式忖");
 	String_Set(19,3,"弛      Abyss Invader      弛");

@@ -38,7 +38,7 @@ char* Data_Read(const char* data)
 	return buffer;
 }
 
-void MovePattern_Read()
+void DataRead_MovePattern()
 {
 	char* movePatternInfo = Data_Read("MovePattern/MovePatternInfo.data");
 
@@ -112,7 +112,7 @@ void MovePattern_Read()
 	free(movePatternInfo);
 }
 
-void Monster_Read()
+void DataRead_Monster()
 {
 	char* monsterInfo = Data_Read("Monster/MonsterInfo.data");
 
@@ -168,7 +168,7 @@ void Monster_Read()
 						memset(word, 0, 100);
 						memcpy(word, monster + eachNextLine, eachOffset - eachNextLine);
 						eachNextLine = eachOffset + 1;
-						gMonsterInfos[i]._movePatternPtr = &gMovePatterns[atoi(word) - 1];
+						gMonsterInfos[i]._movePattern = atoi(word) - 1;
 						line++;
 					}
 					else if (*(monster + eachOffset + 1) == '\0')
@@ -193,7 +193,7 @@ void Monster_Read()
 	free(monsterInfo);
 }
 
-int Stage_Read()
+int DataRead_Stage()
 {
 	char* stageInfo = Data_Read("Stage/StageInfo.data");
 
