@@ -1,22 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Main">
+      <UniqueIdentifier>{9d24ffdf-2fe1-418c-accb-81c3a8f77891}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="DataRead">
+      <UniqueIdentifier>{2e6ade52-f737-47b8-b21f-a103f2ad9bc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Object">
+      <UniqueIdentifier>{e7c246d8-2757-4ae9-a5c8-347b4907c713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{0d0d4d72-7ae0-426e-8b1f-a14f55875f26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{fbe194ec-cba3-4910-a0c1-a65b273ce23f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Screen">
+      <UniqueIdentifier>{f1dd4c0d-b4e1-4d07-86f4-fb5ef33bcf89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AbyssInvaderOOP.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenBuffer.cpp">
+      <Filter>Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenBuffer.h">
+      <Filter>Screen</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
