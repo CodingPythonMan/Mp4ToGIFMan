@@ -33,7 +33,7 @@ char* Data_Read(const char* data)
 	}
 
 	fread(buffer, 1, size, file);
-	buffer[size] = '\0';
+	buffer[size-3] = '\0';
 	fclose(file);
 
 	return buffer;
