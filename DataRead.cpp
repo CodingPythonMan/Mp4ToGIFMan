@@ -10,6 +10,40 @@ MovePatternInfo gMovePatterns[10];
 MonsterInfo gMonsterInfos[10];
 StageInfo gStageInfos[10][10];
 
+<<<<<<< HEAD
+=======
+char* Data_Read(const char* data)
+{
+	char* buffer = nullptr;
+	FILE* file = nullptr;
+	fopen_s(&file, data, "r");
+
+	if (file == nullptr) // warning C6387 : 파일 없음 예외 처리를 해 주어야 한다.
+	{
+		printf("There is No File. \n");
+		return buffer;
+	}
+
+	fseek(file, 0, SEEK_END);
+	size_t size = ftell(file);
+	fseek(file, 0, SEEK_SET);
+
+	buffer = (char*)malloc(size+1);
+
+	if (buffer == nullptr) 
+	{
+		printf("There is No Buffer. \n");
+		return buffer;
+	}
+
+	fread(buffer, 1, size, file);
+	buffer[size-3] = '\0';
+	fclose(file);
+
+	return buffer;
+}
+
+>>>>>>> 98fbef453911eaa370e9a23e7582432c487f967f
 void DataRead_MovePattern()
 {
 	FILE* file = nullptr;
