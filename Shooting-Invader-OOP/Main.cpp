@@ -1,16 +1,19 @@
 #include "ObjectManager.h"
+#include "ScreenBuffer.h"
+#include "windows.h"
 
 int main()
 {
-	//ObjectManager.GetInstance();
+	ObjectManager* objectManager = ObjectManager::GetInstance();
+	ScreenBuffer* screenBuffer = ScreenBuffer::GetInstance();
 
-
-	/*
 	while (1)
 	{
-		ObjectManager->Update();
-		ObjectManager->Render();
+		objectManager->Update();
+		objectManager->Render();
 
-		ScreenBuffer->Flip();
-	}*/
+		screenBuffer->Flip();
+
+		Sleep(50);
+	}
 }

@@ -1,6 +1,6 @@
 #include "BaseObject.h"
 
-BaseObject::BaseObject()
+BaseObject::BaseObject() : _X(0), _Y(0), _ObjectType(0)
 {
 
 }

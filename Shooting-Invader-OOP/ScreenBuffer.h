@@ -1,4 +1,5 @@
 #pragma once
+#include <windows.h>
 
 #define SCREEN_WIDTH	81		// 콘솔 가로 80칸 + NULL
 #define SCREEN_HEIGHT	24		// 콘솔 세로 25칸 + NULL

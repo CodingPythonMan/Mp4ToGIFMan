@@ -12,15 +12,20 @@ ObjectManager::~ObjectManager()
 
 void ObjectManager::Update()
 {
+	MyList<BaseObject*>::iterator iter;
 
+	for (iter = ObjectList.begin(); iter != ObjectList.end(); ++iter)
+	{
+		(*iter)->Update();
+	}
 }
 
 void ObjectManager::Render()
 {
+	MyList<BaseObject*>::iterator iter;
 
-}
-
-void ObjectManager::CreateObject()
-{
-
+	for (iter = ObjectList.begin(); iter != ObjectList.end(); ++iter)
+	{
+		(*iter)->Render();
+	}
 }
