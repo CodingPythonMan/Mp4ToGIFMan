@@ -25,6 +25,8 @@
     <ClCompile Include="MonsterObject.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScreenBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +36,8 @@
     <ClInclude Include="MyList.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScreenBuffer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

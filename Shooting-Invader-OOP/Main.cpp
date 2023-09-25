@@ -4,15 +4,12 @@
 
 int main()
 {
-	ObjectManager* objectManager = ObjectManager::GetInstance();
-	ScreenBuffer* screenBuffer = ScreenBuffer::GetInstance();
-
 	while (1)
 	{
-		objectManager->Update();
-		objectManager->Render();
+		ObjectManager::GetInstance()->Update();
+		ObjectManager::GetInstance()->Render();
 
-		screenBuffer->Flip();
+		ScreenBuffer::GetInstance()->Flip();
 
 		Sleep(50);
 	}

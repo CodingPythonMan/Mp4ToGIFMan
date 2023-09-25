@@ -13,9 +13,6 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{fbe194ec-cba3-4910-a0c1-a65b273ce23f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Screen">
-      <UniqueIdentifier>{f1dd4c0d-b4e1-4d07-86f4-fb5ef33bcf89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library">
       <UniqueIdentifier>{2e6ade52-f737-47b8-b21f-a103f2ad9bc6}</UniqueIdentifier>
     </Filter>
@@ -33,14 +30,20 @@
     <ClCompile Include="MissileObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenBuffer.cpp">
-      <Filter>Screen</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBase.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenBuffer.cpp">
+      <Filter>Library</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,13 +59,19 @@
     <ClInclude Include="MissileObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="ScreenBuffer.h">
-      <Filter>Screen</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="MyList.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBase.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenBuffer.h">
       <Filter>Library</Filter>
     </ClInclude>
   </ItemGroup>
