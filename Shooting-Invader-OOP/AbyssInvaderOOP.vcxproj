@@ -31,6 +31,7 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="MissileObject.h" />
     <ClInclude Include="MonsterObject.h" />
+    <ClInclude Include="MyList.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="ScreenBuffer.h" />

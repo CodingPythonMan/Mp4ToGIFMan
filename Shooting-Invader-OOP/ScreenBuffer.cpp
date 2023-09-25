@@ -2,6 +2,15 @@
 #include <windows.h>
 #include "ScreenBuffer.h"
 
+ScreenBuffer::ScreenBuffer()
+{
+	ConsoleInit();
+}
+
+ScreenBuffer::~ScreenBuffer()
+{
+}
+
 void ScreenBuffer::Flip()
 {
 	for (int count = 0; count < SCREEN_HEIGHT; count++)

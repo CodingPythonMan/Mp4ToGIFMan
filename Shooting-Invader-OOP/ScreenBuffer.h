@@ -13,7 +13,16 @@ public:
 
 	void ConsoleInit();
 
+	static ScreenBuffer* GetInstance(void)
+	{
+		static ScreenBuffer screenBuffer;
+		return &screenBuffer;
+	}
+
 private:
+	ScreenBuffer();
+	~ScreenBuffer();
+
 	// 내부 함수
 	void ClearScreen();
 	void MoveCursor(int iPosX, int iPosY);
