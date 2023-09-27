@@ -25,7 +25,9 @@
     <ClCompile Include="MonsterObject.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
-    <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="SceneClear.cpp" />
+    <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ScreenBuffer.cpp" />
@@ -38,6 +40,9 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="SceneClear.h" />
+    <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ScreenBuffer.h" />

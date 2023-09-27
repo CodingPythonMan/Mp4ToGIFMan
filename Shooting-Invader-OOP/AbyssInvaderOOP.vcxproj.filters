@@ -36,9 +36,6 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBase.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -46,6 +43,15 @@
       <Filter>Library</Filter>
     </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +84,15 @@
       <Filter>Library</Filter>
     </ClInclude>
     <ClInclude Include="SceneTitle.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGame.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

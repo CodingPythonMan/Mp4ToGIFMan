@@ -5,7 +5,6 @@ enum class SceneType
 {
 	TITLE,
 	GAME,
-	PAUSE,
 	CLEAR,
 	GAMEOVER,
 };

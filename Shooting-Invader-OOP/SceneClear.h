@@ -1,10 +1,9 @@
 #pragma once
 #include "SceneBase.h"
 
-class SceneTitle : public SceneBase
+class SceneClear : public SceneBase
 {
 public:
-	SceneTitle();
-
 	void Update();
 };
+
