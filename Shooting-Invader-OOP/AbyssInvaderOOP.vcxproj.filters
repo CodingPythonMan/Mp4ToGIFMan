@@ -45,6 +45,9 @@
     <ClCompile Include="ScreenBuffer.cpp">
       <Filter>Library</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="ScreenBuffer.h">
       <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
