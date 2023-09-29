@@ -26,7 +26,8 @@ void DataRead_MovePattern()
 	{
 		char eachFileName[200] = "MovePattern/";
 		fgets(line, LINE_MAX_SIZE, file);
-		line[strlen(line) - 1] = '\0';
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
 		
 		strcat_s(eachFileName, LINE_MAX_SIZE, line);
 
@@ -67,7 +68,8 @@ void DataRead_Monster()
 	{
 		char eachFileName[200] = "Monster/";
 		fgets(line, LINE_MAX_SIZE, file);
-		line[strlen(line) - 1] = '\0';
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
 
 		strcat_s(eachFileName, LINE_MAX_SIZE, line);
 
@@ -108,7 +110,8 @@ int DataRead_Stage()
 	{
 		char eachFileName[200] = "Stage/";
 		fgets(line, LINE_MAX_SIZE, file);
-		line[strlen(line) - 1] = '\0';
+		if (line[strlen(line) - 1] == '\n')
+			line[strlen(line) - 1] = '\0';
 
 		strcat_s(eachFileName, LINE_MAX_SIZE, line);
 

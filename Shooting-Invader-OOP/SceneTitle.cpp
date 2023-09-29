@@ -1,7 +1,7 @@
+#include <Windows.h>
 #include "SceneTitle.h"
 #include "ScreenBuffer.h"
 #include "SceneManager.h"
-#include <Windows.h>
 
 SceneTitle::SceneTitle()
 {
