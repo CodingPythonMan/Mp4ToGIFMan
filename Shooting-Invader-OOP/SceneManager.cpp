@@ -13,9 +13,12 @@ SceneManager::~SceneManager()
 {
 }
 
-void SceneManager::Run()
+int SceneManager::Run()
 {
-	_Scene->Update();
+	int result = _Scene->Update();
+	_Scene->Render();
+
+	return result;
 }
 
 void SceneManager::LoadScene(SceneType sceneType)

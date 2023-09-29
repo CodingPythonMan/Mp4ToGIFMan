@@ -6,5 +6,6 @@ class SceneTitle : public SceneBase
 public:
 	SceneTitle();
 
-	void Update();
+	int Update();
+	void Render();
 };

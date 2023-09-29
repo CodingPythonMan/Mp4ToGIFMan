@@ -1,5 +1,11 @@
 #include "SceneGameOver.h"
 
-void SceneGameOver::Update()
+int SceneGameOver::Update()
+{
+
+	return true;
+}
+
+void SceneGameOver::Render()
 {
 }

@@ -1,5 +1,10 @@
 #include "SceneClear.h"
 
-void SceneClear::Update()
+int SceneClear::Update()
+{
+	return true;
+}
+
+void SceneClear::Render()
 {
 }

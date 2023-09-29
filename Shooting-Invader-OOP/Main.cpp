@@ -6,6 +6,9 @@ int main()
 {
 	while (1)
 	{
-		SceneManager::GetInstance()->Run();
+		if (!SceneManager::GetInstance()->Run())
+		{
+			return 0;
+		}
 	}
 }

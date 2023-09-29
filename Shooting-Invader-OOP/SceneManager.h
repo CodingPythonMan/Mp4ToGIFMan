@@ -12,7 +12,7 @@ enum class SceneType
 class SceneManager
 {
 public:
-	void Run();
+	int Run();
 	void LoadScene(SceneType sceneType);
 	
 	static SceneManager* GetInstance(void)

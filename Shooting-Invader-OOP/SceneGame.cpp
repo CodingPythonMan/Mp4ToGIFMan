@@ -1,5 +1,10 @@
 #include "SceneGame.h"
 
-void SceneGame::Update()
+int SceneGame::Update()
+{
+	return true;
+}
+
+void SceneGame::Render()
 {
 }

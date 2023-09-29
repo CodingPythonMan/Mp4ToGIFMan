@@ -1,5 +1,6 @@
 #include "SceneTitle.h"
 #include "ScreenBuffer.h"
+#include "SceneManager.h"
 #include <Windows.h>
 
 SceneTitle::SceneTitle()
@@ -8,7 +9,22 @@ SceneTitle::SceneTitle()
 	ScreenBuffer::GetInstance()->ConsoleInit();
 }
 
-void SceneTitle::Update()
+int SceneTitle::Update()
+{
+	if (GetAsyncKeyState(VK_RETURN))
+	{
+		SceneManager::GetInstance()->LoadScene(SceneType::GAME);
+	}
+
+	if (GetAsyncKeyState(VK_ESCAPE) & 0x8001)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void SceneTitle::Render()
 {
 	ScreenBuffer* screenBuffer = ScreenBuffer::GetInstance();
 
