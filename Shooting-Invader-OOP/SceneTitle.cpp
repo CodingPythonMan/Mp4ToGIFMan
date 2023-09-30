@@ -2,11 +2,13 @@
 #include "SceneTitle.h"
 #include "ScreenBuffer.h"
 #include "SceneManager.h"
+#include "DataReader.h"
 
 SceneTitle::SceneTitle()
 {
 	timeBeginPeriod(1);
 	ScreenBuffer::GetInstance()->ConsoleInit();
+	DataReader::GetInstance();
 }
 
 int SceneTitle::Update()

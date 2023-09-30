@@ -10,8 +10,8 @@ public:
 	void Render();
 
 private:
-	
+	void SetMonster();
 
 private:
-	
+	int presentStage;
 };

@@ -4,6 +4,25 @@
 #include <string.h>
 #include "DataReader.h"
 
+DataReader::DataReader()
+{
+	ReadMovePattern();
+	ReadMonster();
+	stageCount = ReadStage();
+}
+
+DataReader::~DataReader()
+{
+}
+
+StageInfo* DataReader::GetStage(int stage)
+{
+	if(stage > 0)
+		return StageInfos[stage - 1];
+
+	return nullptr;
+}
+
 void DataReader::ReadMovePattern()
 {
 	FILE* file = nullptr;
