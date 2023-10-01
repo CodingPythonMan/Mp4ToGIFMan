@@ -1,6 +1,7 @@
 #include "MonsterObject.h"
 #include "ObjectManager.h"
 #include "ScreenBuffer.h"
+#include "MissileObject.h"
 
 MonsterObject::MonsterObject(int x, int y, int moveCycle, char shape, int hp,
 	int coolTime, int* dX, int* dY, int move) : _moveCycle(moveCycle), _shape(shape),
@@ -8,19 +9,45 @@ MonsterObject::MonsterObject(int x, int y, int moveCycle, char shape, int hp,
 {
 	_X = x;
 	_Y = y;
-	_visible = 1;
+	_time = 0;
+	_presentMove = 0;
+	_attackTime = 0;
 
 	ObjectManager::GetInstance()->CreateObject(this);
 }
 
 bool MonsterObject::Update()
 {
+	// 이동 및 없어져야하는지 체크
+	_time++;
+	_attackTime++;
+
+	// 움직일 때만 Render
+	if (_time % _moveCycle == 0)
+	{
+		_X += _dX[_presentMove % _move];
+		_Y += _dY[_presentMove % _move];
+
+		_presentMove++;
+
+		Render();
+
+		_time = 0;
+	}
+	
+	// Cooltime 보다 넘었다면 Bullet 발사
+	if (_attackTime > _coolTime)
+	{
+		MissileObject* missileObject = new MissileObject(_X, _Y-1, 'O', false);
+		ObjectManager::GetInstance()->CreateObject(missileObject);
+
+		_attackTime = 0;
+	}
+
 	return false;
 }
 
-bool MonsterObject::Render()
+void MonsterObject::Render()
 {
 	ScreenBuffer::GetInstance()->SpriteDraw(_X, _Y, _shape);
-
-	return false;
 }

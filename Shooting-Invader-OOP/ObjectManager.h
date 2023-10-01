@@ -21,7 +21,7 @@ public:
 	}
 
 	template<typename T>
-	void DestoryObject(T objectPtr)
+	void DestroyObject(T objectPtr)
 	{
 		ObjectList.remove(objectPtr);
 	}

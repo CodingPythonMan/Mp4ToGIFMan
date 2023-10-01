@@ -7,7 +7,7 @@ public:
 	virtual ~BaseObject();
 
 	virtual bool Update() = 0;
-	virtual bool Render() = 0;
+	virtual void Render() = 0;
 
 	int GetObjectType();
 

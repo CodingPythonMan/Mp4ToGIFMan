@@ -8,11 +8,9 @@ public:
 	int coolTime, int* dX, int* dY, int move);
 
 	bool Update();
-	bool Render();
+	void Render();
 
 private:
-	int _visible;
-
 	int _moveCycle;
 	char _shape;
 	int _hp;
@@ -21,4 +19,8 @@ private:
 	int* _dX;
 	int* _dY;
 	int _move;
+
+	int _time;
+	int _presentMove;
+	int _attackTime;
 };

@@ -1,5 +1,8 @@
 #pragma once
-class PlayerObject
-{
-};
+#include "BaseObject.h"
 
+class PlayerObject : public BaseObject
+{
+	bool Update();
+	void Render();
+};
