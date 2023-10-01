@@ -5,6 +5,5 @@ class SceneClear : public SceneBase
 {
 public:
 	int Update();
-	void Render();
 };
 

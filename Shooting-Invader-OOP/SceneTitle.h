@@ -8,4 +8,7 @@ public:
 
 	int Update();
 	void Render();
+
+private:
+	bool _firstDraw;
 };

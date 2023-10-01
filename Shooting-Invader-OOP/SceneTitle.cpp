@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 #include "DataReader.h"
 
-SceneTitle::SceneTitle()
+SceneTitle::SceneTitle() : _firstDraw(false)
 {
 	timeBeginPeriod(1);
 	ScreenBuffer::GetInstance()->ConsoleInit();
@@ -23,6 +23,12 @@ int SceneTitle::Update()
 		return false;
 	}
 
+	if (!_firstDraw)
+	{
+		Render();
+		_firstDraw = true;
+	}
+		
 	return true;
 }
 

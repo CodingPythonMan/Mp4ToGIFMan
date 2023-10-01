@@ -8,7 +8,7 @@ DataReader::DataReader()
 {
 	ReadMovePattern();
 	ReadMonster();
-	stageCount = ReadStage();
+	_stageCount = ReadStage();
 }
 
 DataReader::~DataReader()
@@ -18,7 +18,15 @@ DataReader::~DataReader()
 StageInfo* DataReader::GetStage(int stage)
 {
 	if(stage > 0)
-		return StageInfos[stage - 1];
+		return _StageInfos[stage - 1];
+
+	return nullptr;
+}
+
+MovePatternInfo* DataReader::GetMovePattern(int movePattern)
+{
+	if (movePattern > 0)
+		return &_MovePatterns[movePattern - 1];
 
 	return nullptr;
 }
@@ -53,11 +61,11 @@ void DataReader::ReadMovePattern()
 		int lineCount = 0;
 		while (fgets(line, LINE_MAX_SIZE, eachFile))
 		{
-			sscanf_s(line, "%i %i", &MovePatterns[i]._dX[lineCount], &MovePatterns[i]._dY[lineCount]);
+			sscanf_s(line, "%i %i", &_MovePatterns[i]._dX[lineCount], &_MovePatterns[i]._dY[lineCount]);
 			lineCount++;
 		}
 
-		MovePatterns[i]._move = lineCount;
+		_MovePatterns[i]._move = lineCount;
 
 		fclose(eachFile);
 	}
@@ -93,13 +101,19 @@ void DataReader::ReadMonster()
 			return;
 
 		fgets(line, LINE_MAX_SIZE, eachFile);
-		MonsterInfos[i]._shape = *line;
+		_MonsterInfos[i]._shape = *line;
 
 		fgets(line, LINE_MAX_SIZE, eachFile);
-		MonsterInfos[i]._movePattern = atoi(line);
+		_MonsterInfos[i]._movePattern = atoi(line);
 
 		fgets(line, LINE_MAX_SIZE, eachFile);
-		MonsterInfos[i]._hp = atoi(line);
+		_MonsterInfos[i]._hp = atoi(line);
+
+		fgets(line, LINE_MAX_SIZE, eachFile);
+		_MonsterInfos[i]._coolTime = atoi(line);
+
+		fgets(line, LINE_MAX_SIZE, eachFile);
+		_MonsterInfos[i]._moveCycle = atoi(line);
 
 		fclose(eachFile);
 	}
@@ -138,10 +152,10 @@ int DataReader::ReadStage()
 		while (fgets(line, LINE_MAX_SIZE, eachFile))
 		{
 			int monsterPtr;
-			sscanf_s(line, "%i %i %i", &monsterPtr, &StageInfos[i][lineCount]._x
-				, &StageInfos[i][lineCount]._y);
+			sscanf_s(line, "%i %i %i", &monsterPtr, &_StageInfos[i][lineCount]._x
+				, &_StageInfos[i][lineCount]._y);
 
-			StageInfos[i][lineCount]._monsterInfoPtr = &MonsterInfos[monsterPtr - 1];
+			_StageInfos[i][lineCount]._monsterInfoPtr = &_MonsterInfos[monsterPtr - 1];
 
 			lineCount++;
 		}

@@ -18,6 +18,8 @@ struct MonsterInfo {
 	int _movePattern;
 	char _shape;
 	int _hp;
+	int _coolTime;
+	int _moveCycle;
 };
 
 //--------------------------------------------------------------------
@@ -40,6 +42,7 @@ public:
 	}
 
 	StageInfo* GetStage(int stage);
+	MovePatternInfo* GetMovePattern(int movePattern);
 
 private:
 	DataReader();
@@ -50,9 +53,9 @@ private:
 	int ReadStage();
 
 private:
-	MovePatternInfo MovePatterns[10];
-	MonsterInfo MonsterInfos[10];
-	StageInfo StageInfos[10][10];
-	int stageCount;
+	MovePatternInfo _MovePatterns[10];
+	MonsterInfo _MonsterInfos[10];
+	StageInfo _StageInfos[10][10];
+	int _stageCount;
 };
 

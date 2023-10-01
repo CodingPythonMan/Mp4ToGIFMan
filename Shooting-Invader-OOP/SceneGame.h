@@ -7,7 +7,6 @@ public:
 	SceneGame();
 
 	int Update();
-	void Render();
 
 private:
 	void SetMonster();

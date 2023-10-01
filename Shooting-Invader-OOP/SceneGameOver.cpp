@@ -5,7 +5,3 @@ int SceneGameOver::Update()
 
 	return true;
 }
-
-void SceneGameOver::Render()
-{
-}

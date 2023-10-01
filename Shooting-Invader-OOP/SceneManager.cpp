@@ -16,7 +16,6 @@ SceneManager::~SceneManager()
 int SceneManager::Run()
 {
 	int result = _Scene->Update();
-	_Scene->Render();
 
 	return result;
 }

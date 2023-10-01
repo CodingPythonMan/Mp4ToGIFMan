@@ -5,6 +5,5 @@ class SceneGameOver : public SceneBase
 {
 public:
 	int Update();
-	void Render();
 };
 

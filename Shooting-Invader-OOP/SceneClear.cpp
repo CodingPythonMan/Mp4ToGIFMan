@@ -4,7 +4,3 @@ int SceneClear::Update()
 {
 	return true;
 }
-
-void SceneClear::Render()
-{
-}
