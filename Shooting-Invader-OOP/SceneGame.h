@@ -15,7 +15,6 @@ private:
 	void SetNextStage();
 	void SetMonster();
 
-private:
 	int _presentStage;
 	PlayerObject* _player;
 };

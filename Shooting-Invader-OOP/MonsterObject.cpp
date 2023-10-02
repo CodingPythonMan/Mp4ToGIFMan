@@ -55,7 +55,7 @@ void MonsterObject::Render()
 
 void MonsterObject::OnCollision(BaseObject* target)
 {
-	if (target->GetObjectType() == ObjectType::Missile)
+	if (target->GetObjectType() == ObjectType::Missile && ((MissileObject*)target)->GetAttackType() == ObjectType::Player)
 	{
 		_hp--;
 	}
