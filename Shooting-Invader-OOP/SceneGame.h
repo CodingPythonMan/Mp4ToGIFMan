@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneBase.h"
+#include "PlayerObject.h"
 
 class SceneGame : public SceneBase
 {
@@ -12,5 +13,6 @@ private:
 	void SetMonster();
 
 private:
-	int presentStage;
+	int _presentStage;
+	PlayerObject* _player;
 };

@@ -14,21 +14,15 @@ public:
 		return &objectManager;
 	}
 
-	template<typename T>
-	void CreateObject(T objectPtr)
-	{
-		ObjectList.push_back(objectPtr);
-	}
-
-	template<typename T>
-	void DestroyObject(T objectPtr)
-	{
-		ObjectList.remove(objectPtr);
-	}
+	void CreateObject(BaseObject* objectPtr);
+	void DestroyObject(BaseObject* objectPtr);
+	void AddDeleteList(BaseObject* objectPtr);
+	void ClearList();
 
 private:
 	ObjectManager();
 	~ObjectManager();
 
 	MyList<BaseObject*> ObjectList;
+	MyList<BaseObject*> DeleteList;
 };

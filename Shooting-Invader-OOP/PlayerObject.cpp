@@ -2,6 +2,7 @@
 #include "PlayerObject.h"
 #include "MissileObject.h"
 #include "ScreenBuffer.h"
+#include "ObjectManager.h"
 
 PlayerObject::PlayerObject()
 {
@@ -10,9 +11,12 @@ PlayerObject::PlayerObject()
 	_X = PLAYER_X;
 	_Y = PLAYER_Y;
 	_hp = PLAYER_HP;
+	_shape = '#';
+
+	ObjectManager::GetInstance()->CreateObject(this);
 }
 
-bool PlayerObject::Update()
+void PlayerObject::Update()
 {
 	// 왼쪽 방향키.
 	if (GetAsyncKeyState(VK_LEFT))
@@ -38,19 +42,25 @@ bool PlayerObject::Update()
 	// 콘트롤 키. (미사일 키)
 	if (GetAsyncKeyState(VK_CONTROL))
 	{
-		MissileObject* missileObject = new MissileObject(_X, _Y + 1, '|', ObjectType::Player
+		MissileObject* missileObject = new MissileObject(_X, _Y - 1, '|', ObjectType::Player
 		, PLAYER_MISSILE_SPEED);
 	}
-
-	return false;
 }
 
 void PlayerObject::Render()
 {
-
+	ScreenBuffer::GetInstance()->SpriteDraw(_X, _Y, _shape);
 }
 
-void PlayerObject::OnCollision()
+void PlayerObject::OnCollision(BaseObject* target)
 {
+	_hp--;
+}
 
+bool PlayerObject::IsDead()
+{
+	if (_hp > 0)
+		return false;
+
+	return true;
 }

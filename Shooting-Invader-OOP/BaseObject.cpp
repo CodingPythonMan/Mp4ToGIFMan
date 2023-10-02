@@ -8,9 +8,9 @@ BaseObject::~BaseObject()
 {
 }
 
-bool BaseObject::CollisionCheck(BaseObject* object, BaseObject* targetObject)
+bool BaseObject::CollisionCheck(BaseObject* targetObject)
 {
-	if (object->_X == targetObject->_X && object->_Y == targetObject->_Y)
+	if (this->_X == targetObject->_X && this->_Y == targetObject->_Y)
 		return true;
 
 	return false;

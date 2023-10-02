@@ -13,11 +13,11 @@ public:
 	BaseObject();
 	virtual ~BaseObject();
 
-	virtual bool Update() = 0;
+	virtual void Update() = 0;
 	virtual void Render() = 0;
-	virtual void OnCollision() = 0;
+	virtual void OnCollision(BaseObject* target) = 0;
 
-	bool CollisionCheck(BaseObject* object, BaseObject* targetObject);
+	bool CollisionCheck(BaseObject* targetObject);
 	ObjectType GetObjectType();
 
 protected:

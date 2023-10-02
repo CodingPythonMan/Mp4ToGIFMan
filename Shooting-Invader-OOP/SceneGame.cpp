@@ -3,11 +3,13 @@
 #include "MonsterObject.h"
 #include "ScreenBuffer.h"
 #include "ObjectManager.h"
+#include "SceneManager.h"
 
 SceneGame::SceneGame()
 {
-	presentStage = 1;
+	_presentStage = 1;
 	SetMonster();
+	_player = new PlayerObject();
 }
 
 int SceneGame::Update()
@@ -16,6 +18,12 @@ int SceneGame::Update()
 	screenBuffer->Clear();
 
 	ObjectManager::GetInstance()->Update();
+
+	if (_player->IsDead())
+	{
+		SceneManager::GetInstance()->LoadScene(SceneType::GAMEOVER);
+	}
+
 	ObjectManager::GetInstance()->Render();
 
 	screenBuffer->Flip();
@@ -25,9 +33,9 @@ int SceneGame::Update()
 
 void SceneGame::SetMonster()
 {
-	StageInfo* stageInfo = DataReader::GetInstance()->GetStage(presentStage);
+	StageInfo* stageInfo = DataReader::GetInstance()->GetStage(_presentStage);
 
-	for ( ; stageInfo->_monsterInfoPtr != nullptr; ++stageInfo)
+	for (; stageInfo->_monsterInfoPtr != nullptr; ++stageInfo)
 	{
 		int movePattern = stageInfo->_monsterInfoPtr->_movePattern;
 		MovePatternInfo* movePatternInfo = DataReader::GetInstance()->GetMovePattern(movePattern);

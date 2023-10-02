@@ -17,7 +17,7 @@ MonsterObject::MonsterObject(int x, int y, int moveCycle, char shape, int hp,
 	ObjectManager::GetInstance()->CreateObject(this);
 }
 
-bool MonsterObject::Update()
+void MonsterObject::Update()
 {
 	// 이동 및 없어져야하는지 체크
 	_time++;
@@ -39,14 +39,11 @@ bool MonsterObject::Update()
 	// Cooltime 보다 넘었다면 Bullet 발사
 	if (_attackTime > _coolTime)
 	{
-		MissileObject* missileObject = new MissileObject(_X, _Y-1, 'O', ObjectType::Monster,
+		MissileObject* missileObject = new MissileObject(_X, _Y+1, 'O', ObjectType::Monster,
 			_missileSpeed);
-		ObjectManager::GetInstance()->CreateObject(missileObject);
 
 		_attackTime = 0;
 	}
-
-	return false;
 }
 
 void MonsterObject::Render()
@@ -54,6 +51,10 @@ void MonsterObject::Render()
 	ScreenBuffer::GetInstance()->SpriteDraw(_X, _Y, _shape);
 }
 
-void MonsterObject::OnCollision()
+void MonsterObject::OnCollision(BaseObject* target)
 {
+	if (target->GetObjectType() == ObjectType::Missile)
+	{
+		_hp--;
+	}
 }

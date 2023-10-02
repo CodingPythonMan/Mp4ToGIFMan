@@ -10,24 +10,34 @@ MissileObject::MissileObject(int x, int y, char shape, ObjectType objectType, in
 	_attackType = objectType;
 	_missileSpeed = missileSpeed;
 	_ObjectType = ObjectType::Missile;
+	_time = 0;
 
 	ObjectManager::GetInstance()->CreateObject(this);
 }
 
-bool MissileObject::Update()
+void MissileObject::Update()
 {
-	if (_attackType == ObjectType::Player)
-	{
-		_Y--;
-	}
-	else if(_attackType == ObjectType::Monster)
-	{
-		_Y++;
-	}
+	_time++;
 
-		
+	if (_time % _missileSpeed == 0)
+	{
+		if (_attackType == ObjectType::Player)
+		{
+			_Y--;
+		}
+		else if (_attackType == ObjectType::Monster)
+		{
+			_Y++;
+		}
 
-	return false;
+		// 경계 밖으로 나가면 사라진다.
+		if (_X < 0 || _X > 79 || _Y < 0 || _Y > 23)
+		{
+			ObjectManager::GetInstance()->AddDeleteList(this);
+		}
+
+		_time = 0;
+	}
 }
 
 void MissileObject::Render()
@@ -35,6 +45,7 @@ void MissileObject::Render()
 	ScreenBuffer::GetInstance()->SpriteDraw(_X, _Y, _shape);
 }
 
-void MissileObject::OnCollision()
+void MissileObject::OnCollision(BaseObject* target)
 {
+	ObjectManager::GetInstance()->AddDeleteList(this);
 }

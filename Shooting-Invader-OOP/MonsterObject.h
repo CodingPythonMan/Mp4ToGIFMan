@@ -7,9 +7,9 @@ public:
 	MonsterObject(int x, int y, int moveCycle, char shape, int hp,
 	int coolTime, int bulletSpeed, int* dX, int* dY, int move);
 
-	bool Update();
+	void Update();
 	void Render();
-	void OnCollision();
+	void OnCollision(BaseObject* target);
 
 private:
 	int _moveCycle;

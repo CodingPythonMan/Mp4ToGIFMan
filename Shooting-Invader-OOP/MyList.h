@@ -195,6 +195,10 @@ public:
 				{
 					iter = erase(iter);
 				}
+				else
+				{
+					++iter;
+				}
 			}
 		}
 	}
