@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "SceneGame.h"
 #include "DataReader.h"
 #include "MonsterObject.h"
@@ -10,6 +11,7 @@ SceneGame::SceneGame()
 	_presentStage = 1;
 	SetMonster();
 	_player = new PlayerObject();
+	ObjectManager::GetInstance()->CreateObject(_player);
 }
 
 int SceneGame::Update()
@@ -24,11 +26,31 @@ int SceneGame::Update()
 		SceneManager::GetInstance()->LoadScene(SceneType::GAMEOVER);
 	}
 
+	if (MonsterObject::_monsterCount <= 0)
+	{
+		if (_presentStage == MAX_STAGE)
+		{
+			SceneManager::GetInstance()->LoadScene(SceneType::CLEAR);
+		}
+
+		SetNextStage();
+	}
+
 	ObjectManager::GetInstance()->Render();
 
 	screenBuffer->Flip();
+	printf("\nHP : %d", _player->DisplayHP());
 
 	return true;
+}
+
+void SceneGame::SetNextStage()
+{
+	_presentStage++;
+	MonsterObject::_monsterCount = 0;
+	ObjectManager::GetInstance()->ClearList();
+	_player = _player->LoadStatusByPreviousStage();
+	SetMonster();
 }
 
 void SceneGame::SetMonster()
@@ -44,5 +66,8 @@ void SceneGame::SetMonster()
 			stageInfo->_monsterInfoPtr->_hp, stageInfo->_monsterInfoPtr->_coolTime,
 			stageInfo->_monsterInfoPtr->_misslieSpeed,
 			movePatternInfo->_dX, movePatternInfo->_dY, movePatternInfo->_move);
+
+		MonsterObject::_monsterCount++;
+		ObjectManager::GetInstance()->CreateObject(monsterObject);
 	}
 }

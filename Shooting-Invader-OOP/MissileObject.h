@@ -10,6 +10,7 @@ public:
 	void Update();
 	void Render();
 	void OnCollision(BaseObject* target);
+	ObjectType GetAttackType();
 
 private:
 	int _missileSpeed;

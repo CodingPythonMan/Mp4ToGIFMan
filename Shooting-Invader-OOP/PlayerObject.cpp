@@ -12,38 +12,52 @@ PlayerObject::PlayerObject()
 	_Y = PLAYER_Y;
 	_hp = PLAYER_HP;
 	_shape = '#';
-
-	ObjectManager::GetInstance()->CreateObject(this);
+	_attackCoolTime = 0;
+	_moveCoolTime = 0;
 }
 
 void PlayerObject::Update()
 {
-	// 왼쪽 방향키.
-	if (GetAsyncKeyState(VK_LEFT))
+	_attackCoolTime++;
+	_moveCoolTime++;
+
+	if (_moveCoolTime > MOVE_COOLTIME)
 	{
-		_X--;
-	}
-	// 오른쪽 방향키.
-	if (GetAsyncKeyState(VK_RIGHT))
-	{
-		_X++;
-	}
-	// 위쪽 방향키.
-	if (GetAsyncKeyState(VK_UP) & 0x8001)
-	{
-		_Y--;
-	}
-	// 아래쪽 방향키.
-	if (GetAsyncKeyState(VK_DOWN) & 0x8001)
-	{
-		_Y++;
+		// 왼쪽 방향키.
+		if (GetAsyncKeyState(VK_LEFT))
+		{
+			_X--;
+		}
+		// 오른쪽 방향키.
+		if (GetAsyncKeyState(VK_RIGHT))
+		{
+			_X++;
+		}
+		// 위쪽 방향키.
+		if (GetAsyncKeyState(VK_UP) & 0x8001)
+		{
+			_Y--;
+		}
+		// 아래쪽 방향키.
+		if (GetAsyncKeyState(VK_DOWN) & 0x8001)
+		{
+			_Y++;
+		}
+
+		_moveCoolTime = 0;
 	}
 
 	// 콘트롤 키. (미사일 키)
 	if (GetAsyncKeyState(VK_CONTROL))
 	{
-		MissileObject* missileObject = new MissileObject(_X, _Y - 1, '|', ObjectType::Player
-		, PLAYER_MISSILE_SPEED);
+		if (_attackCoolTime > ATTACK_COOLTIME)
+		{
+			MissileObject* missileObject = new MissileObject(_X, _Y - 1, '|', ObjectType::Player
+				, PLAYER_MISSILE_SPEED);
+			ObjectManager::GetInstance()->CreateObject(missileObject);
+
+			_attackCoolTime = 0;
+		}
 	}
 }
 
@@ -54,7 +68,9 @@ void PlayerObject::Render()
 
 void PlayerObject::OnCollision(BaseObject* target)
 {
-	_hp--;
+	if((target->GetObjectType() == ObjectType::Missile && ((MissileObject*)target)->GetAttackType() == ObjectType::Monster)
+		|| target->GetObjectType() == ObjectType::Monster)
+		_hp--;
 }
 
 bool PlayerObject::IsDead()
@@ -63,4 +79,19 @@ bool PlayerObject::IsDead()
 		return false;
 
 	return true;
+}
+
+PlayerObject* PlayerObject::LoadStatusByPreviousStage()
+{
+	PlayerObject* object = new PlayerObject();
+	object->_hp = _hp;
+
+	ObjectManager::GetInstance()->CreateObject(object);
+
+	return object;
+}
+
+int PlayerObject::DisplayHP()
+{
+	return _hp;
 }

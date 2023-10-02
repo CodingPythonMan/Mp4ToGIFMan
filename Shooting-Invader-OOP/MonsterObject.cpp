@@ -3,6 +3,8 @@
 #include "ScreenBuffer.h"
 #include "MissileObject.h"
 
+int MonsterObject::_monsterCount = 0;
+
 MonsterObject::MonsterObject(int x, int y, int moveCycle, char shape, int hp,
 	int coolTime, int missileSpeed, int* dX, int* dY, int move) : _moveCycle(moveCycle), _shape(shape),
 	_hp(hp), _coolTime(coolTime), _missileSpeed(missileSpeed), _dX(dX), _dY(dY), _move(move)
@@ -13,8 +15,6 @@ MonsterObject::MonsterObject(int x, int y, int moveCycle, char shape, int hp,
 	_time = 0;
 	_presentMove = 0;
 	_attackTime = 0;
-
-	ObjectManager::GetInstance()->CreateObject(this);
 }
 
 void MonsterObject::Update()
@@ -24,7 +24,7 @@ void MonsterObject::Update()
 	_attackTime++;
 
 	// 움직일 때만 Render
-	if (_time % _moveCycle == 0)
+	if (_time > _moveCycle)
 	{
 		_X += _dX[_presentMove % _move];
 		_Y += _dY[_presentMove % _move];
@@ -42,6 +42,8 @@ void MonsterObject::Update()
 		MissileObject* missileObject = new MissileObject(_X, _Y+1, 'O', ObjectType::Monster,
 			_missileSpeed);
 
+		ObjectManager::GetInstance()->CreateObject(missileObject);
+
 		_attackTime = 0;
 	}
 }
@@ -56,5 +58,11 @@ void MonsterObject::OnCollision(BaseObject* target)
 	if (target->GetObjectType() == ObjectType::Missile)
 	{
 		_hp--;
+	}
+
+	if (_hp <= 0)
+	{
+		_monsterCount--;
+		ObjectManager::GetInstance()->AddDeleteList(this);
 	}
 }

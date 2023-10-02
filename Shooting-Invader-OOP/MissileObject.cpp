@@ -11,8 +11,6 @@ MissileObject::MissileObject(int x, int y, char shape, ObjectType objectType, in
 	_missileSpeed = missileSpeed;
 	_ObjectType = ObjectType::Missile;
 	_time = 0;
-
-	ObjectManager::GetInstance()->CreateObject(this);
 }
 
 void MissileObject::Update()
@@ -48,4 +46,9 @@ void MissileObject::Render()
 void MissileObject::OnCollision(BaseObject* target)
 {
 	ObjectManager::GetInstance()->AddDeleteList(this);
+}
+
+ObjectType MissileObject::GetAttackType()
+{
+	return _attackType;
 }

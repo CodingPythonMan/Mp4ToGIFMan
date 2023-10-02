@@ -2,6 +2,8 @@
 #include "SceneBase.h"
 #include "PlayerObject.h"
 
+#define MAX_STAGE 3
+
 class SceneGame : public SceneBase
 {
 public:
@@ -10,6 +12,7 @@ public:
 	int Update();
 
 private:
+	void SetNextStage();
 	void SetMonster();
 
 private:

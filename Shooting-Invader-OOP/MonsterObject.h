@@ -11,6 +11,8 @@ public:
 	void Render();
 	void OnCollision(BaseObject* target);
 
+	static int _monsterCount;
+
 private:
 	int _moveCycle;
 	char _shape;
