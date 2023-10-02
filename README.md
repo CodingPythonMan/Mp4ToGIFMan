@@ -1,5 +1,5 @@
 # Shooting-Invader
-CPP Shooting Game not using OOP
+CPP Shooting Game
 
 ## Game Title
 ![image](https://github.com/CodingPythonMan/Shooting-Invader/assets/27558778/8fa1a6d1-d749-4cee-8183-b8ef15309ec9)
