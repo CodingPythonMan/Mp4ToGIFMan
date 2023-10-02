@@ -34,6 +34,7 @@ void SceneGame::SetMonster()
 		MonsterObject* monsterObject = new MonsterObject(stageInfo->_x, stageInfo->_y,
 			stageInfo->_monsterInfoPtr->_moveCycle, stageInfo->_monsterInfoPtr->_shape,
 			stageInfo->_monsterInfoPtr->_hp, stageInfo->_monsterInfoPtr->_coolTime,
+			stageInfo->_monsterInfoPtr->_misslieSpeed,
 			movePatternInfo->_dX, movePatternInfo->_dY, movePatternInfo->_move);
 	}
 }

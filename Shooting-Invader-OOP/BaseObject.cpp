@@ -1,16 +1,22 @@
 #include "BaseObject.h"
 
-BaseObject::BaseObject() : _X(0), _Y(0), _ObjectType(0)
+BaseObject::BaseObject() : _X(0), _Y(0), _ObjectType(ObjectType::None)
 {
-
 }
 
 BaseObject::~BaseObject()
 {
-
 }
 
-int BaseObject::GetObjectType()
+bool BaseObject::CollisionCheck(BaseObject* object, BaseObject* targetObject)
+{
+	if (object->_X == targetObject->_X && object->_Y == targetObject->_Y)
+		return true;
+
+	return false;
+}
+
+ObjectType BaseObject::GetObjectType()
 {
 	return _ObjectType;
 }

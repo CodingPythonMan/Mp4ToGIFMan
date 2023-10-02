@@ -20,6 +20,7 @@ struct MonsterInfo {
 	int _hp;
 	int _coolTime;
 	int _moveCycle;
+	int _misslieSpeed;
 };
 
 //--------------------------------------------------------------------

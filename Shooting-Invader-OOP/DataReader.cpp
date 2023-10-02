@@ -115,6 +115,9 @@ void DataReader::ReadMonster()
 		fgets(line, LINE_MAX_SIZE, eachFile);
 		_MonsterInfos[i]._moveCycle = atoi(line);
 
+		fgets(line, LINE_MAX_SIZE, eachFile);
+		_MonsterInfos[i]._misslieSpeed = atoi(line);
+
 		fclose(eachFile);
 	}
 
