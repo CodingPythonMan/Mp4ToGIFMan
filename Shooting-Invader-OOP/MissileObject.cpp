@@ -29,7 +29,7 @@ void MissileObject::Update()
 		}
 
 		// 경계 밖으로 나가면 사라진다.
-		if (_X < 0 || _X > 79 || _Y < 0 || _Y > 23)
+		if (_X < 0 || _X > SCREEN_WIDTH-2 || _Y < 0 || _Y > SCREEN_HEIGHT-1)
 		{
 			ObjectManager::GetInstance()->AddDeleteList(this);
 		}

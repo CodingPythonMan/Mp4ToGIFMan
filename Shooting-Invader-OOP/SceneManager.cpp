@@ -1,9 +1,9 @@
+#include <windows.h>
 #include "SceneManager.h"
 #include "SceneTitle.h"
 #include "SceneGame.h"
 #include "SceneClear.h"
 #include "SceneGameOver.h"
-#include <windows.h>
 
 SceneManager::SceneManager()
 {
@@ -16,27 +16,30 @@ SceneManager::~SceneManager()
 
 int SceneManager::Run()
 {
-	unsigned long delay = 0;
-	unsigned long beforeTime = timeGetTime();
+	unsigned int tick = 0;
+	unsigned int curTime = timeGetTime();
+	unsigned int ourTime = curTime;
+	unsigned int frameTime = curTime;
 	int FrameCount = 0;
-	DWORD Tick = timeGetTime();
+
+	bool skipDraw = false;
 
 	int result = _Scene->Update();
 
 	FrameCount++;
-	if (timeGetTime() - Tick >= 1000)
-	{
-		FrameCount = 0;
-		Tick = timeGetTime();
-	}
+	// Cal
+	curTime = timeGetTime();
+	tick = curTime - ourTime;
+	ourTime += WAIT;
 
-	// 프레임 조절
-	if (delay < 20)
+	// Skip
+	if (tick <= WAIT)
 	{
-		Sleep(20 - delay);
-		beforeTime += 20;
-		delay = timeGetTime() - beforeTime;
+		Sleep(WAIT - tick);
+		skipDraw = false;
 	}
+	else
+		skipDraw = true;
 
 	return result;
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "SceneBase.h"
 
+#define WAIT 20
+
 enum class SceneType
 {
 	TITLE,
